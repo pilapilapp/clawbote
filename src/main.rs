@@ -1,15 +1,17 @@
-use tracing::{info, warn, error};
-use tracing_subscriber::{fmt, EnvFilter};
+use ethers::{
+    prelude::*,
+    providers::{Provider, Http},
+};
+use eyre::Result;
 
-fn main() {
-    // Initialize the tracing subscriber with an explicit EnvFilter
-    let filter = EnvFilter::new("info");
+#[tokio::main]
+async fn main() -> Result<()> {
+    // Connect to a local Ethereum node (like Ganache) or a testnet
+    let provider = Provider::<Http>::try_from("http://localhost:8545")?;
     
-    fmt()
-        .with_env_filter(filter)
-        .init();
-    
-    info!("Starting Clawbote... v2");
-    warn!("This is a warning example v2");
-    error!("This is an error example v2");
+    // Get the latest block number
+    let block = provider.get_block_number().await?;
+    println!("Current block: {}", block);
+
+    Ok(())
 }
