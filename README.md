@@ -4,7 +4,7 @@ A simple Ethereum blockchain interaction tool built in Rust using the ethers-rs 
 
 ## Overview
 
-Clawbote is a command-line application that connects to a local Ethereum node (like Ganache) and demonstrates basic blockchain interactions. Currently, it retrieves and displays the latest block number.
+Clawbote is a command-line application that connects to a local Ethereum node (like Ganache) and provides basic blockchain interaction capabilities.
 
 ## Prerequisites
 
@@ -32,18 +32,47 @@ Clawbote is a command-line application that connects to a local Ethereum node (l
    
    By default, Ganache will run on `http://localhost:8545` with 10 pre-funded accounts
 
+### Building Clawbote
+
+```bash
+# Build debug version
+cargo build
+
+# Build release version
+cargo build --release
+```
+
+## Usage
+
+```bash
+clawbote <command> [arguments...]
+
+Available commands:
+  balance <address>     - Get account balance in ETH
+  nonce <address>       - Get account transaction count (nonce)
+  code-size <address>   - Get contract code size (0 for EOA)
+  help                  - Show this help message
+```
 
 ## Features Implemented
 
-- **Account Balance Query**: Retrieve the ETH balance of any Ethereum address
-  - Connects to a local Ethereum node (Ganache)
-  - Displays balance in ETH with 2 decimal precision
-  - Uses ethers-rs for reliable blockchain interaction
+- **Command Line Interface**:
+  - Help command for usage information
+  - Structured command parsing
+  - Clear error messages and usage examples
+
+- **Account Queries**:
+  - Get ETH balance of any address
+  - Get transaction count (nonce) of any address
+  - Get contract code size (useful for distinguishing contracts from EOAs)
 
 - **Modular Architecture**:
   - Controller-Service pattern for clean separation of concerns
   - Error handling using `eyre` for robust operation
   - Asynchronous operations with `tokio` runtime
 
-- **Transfer Infrastructure**: Basic structure in place for future ETH transfer functionality
+- **Infrastructure**:
+  - Local node (Ganache) connectivity
+  - Basic blockchain interaction framework
+  - Foundation for future feature additions
 

@@ -4,11 +4,17 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+# Group related dependencies
+# Ethereum
+ethers = { version = "2.0", features = ["ws", "rustls"] }
+
+# Async Runtime
 tokio = { version = "1.36.0", features = ["full"] }
+
+# Web Framework (if needed)
 axum = { version = "0.7.4", features = ["macros"] }
+
+# Logging & Error Handling
 tracing = "0.1.40"
 tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
-
-# Add these Ethereum-related dependencies
-ethers = { version = "2.0", features = ["ws", "rustls"] }
 eyre = "0.6"
