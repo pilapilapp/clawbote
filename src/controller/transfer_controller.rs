@@ -4,6 +4,7 @@ pub struct TransferController {
     // We'll add service later
 }
 
+#[allow(dead_code)]
 impl TransferController {
     pub fn new() -> Self {
         Self {}
