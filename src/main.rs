@@ -1,17 +1,13 @@
-use ethers::{
-    prelude::*,
-    providers::{Provider, Http},
-};
+mod controller;
+mod service;
+
+use controller::AccountController;
 use eyre::Result;
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    // Connect to a local Ethereum node (like Ganache) or a testnet
-    let provider = Provider::<Http>::try_from("http://localhost:8545")?;
-    
-    // Get the latest block number
-    let block = provider.get_block_number().await?;
-    println!("Current block: {}", block);
-
+    let controller = AccountController::new()?;
+    let balance = controller.get_balance("0xfdDae01FD29B7b7AD169F9f2557071AA40A3A134").await?;
+    println!("Balance: {:.2} ETH", balance);
     Ok(())
 }
